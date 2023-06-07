@@ -1,0 +1,189 @@
+<html>
+<head>
+  <title>Radio Coran</title>
+  <link rel="shortcut icon" href="https://png.pngtree.com/png-clipart/20210328/big/pngtree-quran-book-cover-arabic-calligraphy-with-floral-border-png-image_6169720.png" type="image/x-icon">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #228b22;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      color: #228b22;
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .radio-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .radio-list li {
+      margin-bottom: 10px;
+    }
+
+    .radio-list li button {
+      padding: 10px 20px;
+      background-color: #228b22;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .radio-list li button.active {
+      background-color: #1db954;
+    }
+
+    .radio-list li button:hover {
+      background-color: #1db954;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .controls button {
+      padding: 12px 24px;
+      background-color: #1db954;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .controls button:hover {
+      background-color: #198c3f;
+    }
+
+    video {
+      width: 100%;
+      max-width: 500px;
+      margin: 20px 0;
+    }
+
+
+
+    footer {
+      background-color: #f8f8f8;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+
+    footer a {
+      color: #888;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>CORAN-Radio</h1>
+  </div>
+  
+  <div class="container">
+    <h1>Radio Coran</h1>
+  
+    <ul class="radio-list">
+      <li>
+        <button onclick="playAudio(this, 'http://live.mp3quran.net:8006/;')">Radio 1</button>
+      </li>
+      <li>
+        <button onclick="playAudio(this, 'http://live.mp3quran.net:8026/;')">Radio 2</button>
+      </li>
+      <li>
+        <button onclick="playAudio(this, 'http://live.mp3quran.net:8008/;')">Radio 3</button>
+      </li>
+    </ul>
+    
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/qK-zm6rcYmA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="controls">
+      <button id="playButton" onclick="togglePlay()">Play</button>
+      <button id="stopButton" onclick="stopAudio()" disabled>Stop</button>
+    </div>
+  </div>
+  
+  <script>
+    var audioElement = new Audio();
+    var playButton = document.getElementById("playButton");
+    var stopButton = document.getElementById("stopButton");
+    
+    function playAudio(button, audioUrl) {
+      audioElement.src = audioUrl;
+      audioElement.play();
+      
+      playButton.innerText = "Pause";
+      stopButton.disabled = false;
+      
+      var activeButton = document.querySelector(".radio-list li button.active");
+      if (activeButton) {
+        activeButton.classList.remove("active");
+      }
+      button.classList.add("active");
+    }
+    
+    function togglePlay() {
+      if (audioElement.paused) {
+        audioElement.play();
+        playButton.innerText = "Pause";
+      } else {
+        audioElement.pause();
+        playButton.innerText = "Play";
+      }
+    }
+    
+    function stopAudio() {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      playButton.innerText = "Play";
+      stopButton.disabled = true;
+      
+      var activeButton = document.querySelector(".radio-list li button.active");
+      if (activeButton) {
+        activeButton.classList.remove("active");
+      }
+    }
+  </script>
+  <footer>
+    Développé par <a href="https://github.com/YounousTech">YounousTech</a>
+  </footer>
+</body>
+</html>
